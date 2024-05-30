@@ -34,7 +34,7 @@ const ProductTemplate = () => {
 
     useEffect(() => {
         getProduct();
-    }, []);
+    }, [id]);
 
     const handleAddCartProduct = () => {
         if (countProduct === 0) {
@@ -54,6 +54,10 @@ const ProductTemplate = () => {
                     (item) => item.productId === product?.productId
                 );
 
+                const newListImages = [
+                    product?.thumbnail,
+                    ...JSON.parse(product?.images),
+                ]
                 if (existingProductIndex !== -1) {
                     setErrorBuy("Sản phẩm đã tồn tại trong giỏ hàng!");
                     setTimeout(() => {
@@ -63,7 +67,7 @@ const ProductTemplate = () => {
                 } else {
                     const productBuy = {
                         title: product?.title,
-                        thumbnail: product?.thumbnail,
+                        thumbnail: newListImages[thumbsSwiper],
                         inventory: product?.inventory,
                         productId: product?.productId,
                         price: product?.price,
@@ -109,10 +113,11 @@ const ProductTemplate = () => {
                 <div>
                     {product ? (
                         <>
-                            <div className="md:flex bg-white shadow-sm rounded-md py-4">
-                                <div className="relative md:w-4/12 px-3 mb-3">
-                                    <div className="overflow-hidden max-w-md:max-w-[400px]">
+                            <div className="md:flex bg-gradient-to-r from-black-500 to-pink-500 shadow-md rounded-md py-4 transition-all hover:shadow-lg">
+                                 <div className="relative md:w-4/12 px-3 mb-3">
+                                         <div className="overflow-hidden max-w-md:max-w-[400px]">
                                         <Gallery
+                                            key={product?.productId}
                                             thumbsSwiper={thumbsSwiper}
                                             setThumbsSwiper={setThumbsSwiper}
                                             images={[
@@ -124,16 +129,16 @@ const ProductTemplate = () => {
                                 </div>
                                 <div className="relative md:w-8/12 px-3 mb-3">
                                     <div className="mb-4">
-                                        <h1 className="font-semibold text-2xl">
+                                        <h1 key={product?.productId} className="font-semibold text-2xl">
                                             {product?.title}
                                         </h1>
                                     </div>
 
-                                    <div className="p-4 mb-4 bg-gray-100 flex items-end leading-none">
+                                    <div className="py-4 mb-4 flex items-end leading-none">
                                         <div className="font-semibold text-[30px] text-rose-500 mr-3">
                                             {formatNumberToPrice(
                                                 product?.price || 0
-                                            )}
+                                            )} VNĐ
                                         </div>
                                     </div>
 
@@ -160,11 +165,11 @@ const ProductTemplate = () => {
                                     <div className="flex mb-4 max-w-[500px]">
                                         <button
                                             onClick={handleAddCartProduct}
-                                            className="sm:py-3 py-2 px-1 flex items-center justify-center border bg-blue-600 hover:bg-blue-700/90 text-white uppercase font-semibold select-none w-2/3 mr-2"
+                                            className="sm:py-3 py-2 px-1 flex items-center justify-center border bg-gray-600 hover:bg-green-700/90 text-white uppercase font-semibold select-none w-2/3 mr-2"
                                         >
                                             <IconCartShopping
-                                                size={18}
-                                                className="fill-white mb-1 mr-1"
+                                                size={25}
+                                                className="fill-red mb-1 mr-1"
                                             />{" "}
                                             Thêm vào giỏ hàng
                                         </button>

@@ -30,6 +30,7 @@ const AdminEditProduct = () => {
         inventory: 0,
         description: "",
     });
+    const [typeProduct, setTypeProduct] = useState("ao");
     const [thumbnail, setThumbnail] = useState({
         urlThumbnail: "",
         fileThumbnail: null,
@@ -77,7 +78,7 @@ const AdminEditProduct = () => {
         
         try {
             const updateProductRes = await productService.update({
-                title, price, inventory, description, productId
+                title, type: typeProduct, price, inventory, description, productId
             });
             
             if(updateProductRes.success) {
@@ -98,7 +99,7 @@ const AdminEditProduct = () => {
             const productRes = await productService.findOne(productId);
 
             if(productRes?.success) {
-                const { productId, title, price, inventory, description } = productRes.product;
+                const { productId, type, title, price, inventory, description } = productRes.product;
                 setDataProduct({
                     productId: productId,
                     title: title,
@@ -106,6 +107,7 @@ const AdminEditProduct = () => {
                     inventory: inventory,
                     description: description,
                 });
+                setTypeProduct(type);
             }
         } catch (error) {
             
@@ -157,6 +159,17 @@ const AdminEditProduct = () => {
                         onChange={eventOnchangeDataProduct}
                         className={`border h-10 px-4 rounded-md w-full outline-none`}
                     />
+                </div>
+
+                <div className="mb-4">
+                    <select value={typeProduct} onChange={(event) => setTypeProduct(event.target.value)} className="border px-2 py-1 rounded-md">
+                        <option value="macbook">macbook</option>
+                        <option value="ipad">ipad</option>
+                        <option value="iphone">iphone</option>
+                        <option value="watch">watch</option>
+                        <option value="airpods">airpods</option>
+
+                    </select>
                 </div>
 
                 <div className="mb-3">

@@ -13,7 +13,7 @@ body {
     height: 5px;
     position: relative;
     overflow: hidden;
-    background-color: white;
+    background-color: rgb(8, 46, 172);
 }
 
 .loading-bar::before {

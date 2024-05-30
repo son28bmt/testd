@@ -18,9 +18,9 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<MainLayout><HomeTemplate /></MainLayout>}/>
-                <Route path="/auth/login" element={<MainLayout><LoginTemplate /></MainLayout>}/>
-                <Route path="/auth/register" element={<MainLayout><RegisterTemplate /></MainLayout>}/>
+                <Route path="/:type?" element={<MainLayout><HomeTemplate /></MainLayout>}/>
+                <Route path="/auth/login" element={<LoginTemplate />}/>
+                <Route path="/auth/register" element={<RegisterTemplate />}/>
                 <Route path="/san-pham/:id" element={<MainLayout><ProductTemplate /></MainLayout>}/>
                 <Route path="/gio-hang" element={<MainLayout><ShoppingCartTemplate /></MainLayout>}/>
 

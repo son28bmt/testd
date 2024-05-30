@@ -16,7 +16,7 @@ const CardProduct = ({ product }) => {
                     <div className="px-3 py-3 h-28">
                         <h3 className="line-clamp-2">{product?.title}</h3>
                         <div className="mt-2">
-                            <span className="text-lg text-red-500">{formatNumberToPrice(product?.price)} ₫</span>
+                            <span className="text-lg text-red-500">{formatNumberToPrice(product?.price)} VNĐ</span>
                         </div>
                     </div>
                 </div>

@@ -62,18 +62,18 @@ const RegisterTemplate = () => {
 
     return (
         <>
-            <div>
-                <div className="py-4" style={{ minHeight: "calc(100vh - 174px)" }}>
+            <div className="h-screen bg-no-repeat bg-contain" style={{ background: "URL('https://res.cloudinary.com/dqefgk4f2/image/upload/v1716816155/BANHANG/products/images/p5xsi7b1ehyzzoibmsg6.jpg')" }}>
+                <div className="p-4 h-screen flex items-center">
                     <div
-                        className={`bg-white dark:bg-slate-800/70 rounded-md shadow-sm border max-w-xl w-full mx-auto overflow-hidden ${loadingLogin && "pointer-events-none opacity-70"}`}
+                        className={`bg-blue-900 rounded-md shadow-sm border max-w-xl w-full ml-auto overflow-hidden ${loadingLogin && "pointer-events-none"}`}
                     >
                         <div
                             className={`loading-bar ${!loadingLogin && "before:content-none"}`}
                         ></div>
-                        <div className="px-5 py-5">
-                            <div className="mb-3">
+                        <div className="px-5 py-100">
+                            <div className="mb-5">
                                 <Link to={`/`} className="flex items-center justify-center">
-                                    <h1 className="ml-2 font-bold text-2xl text-red-600 dark:text-white">TEST</h1>
+                                    <img className="h-10 w-10 object-cover" src="/static/images/logo-tr.png"/>
                                 </Link>
                             </div>
                             <div className="font-semibold text-center text-2xl mb-5">
@@ -119,6 +119,16 @@ const RegisterTemplate = () => {
                                 >
                                     Đăng kí
                                 </div>
+                            </div>
+
+                            <div className="flex">
+                                <Link
+                                    to={`/auth/login`}
+                                    title="Trang đăng nhập"
+                                    className="px-2 py-1 text-blue-500 ml-auto"
+                                >
+                                    Đăng nhập
+                                </Link>
                             </div>
 
                         </div>

@@ -9,7 +9,7 @@ const cors = require("cors");
 app.use(cors());
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3001");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
@@ -17,7 +17,7 @@ app.use(function (req, res, next) {
 // const productRouter = require("./routes/product");
 const route = require("./routes");
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4001
 
 
 const main = async () => {

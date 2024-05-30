@@ -65,6 +65,12 @@ const ShoppingCartTemplate = () => {
             }, 5000);
             return;
         }
+        const { name, phone } = infoOreder;
+        const { city, district, specificAdress, ward } = adressUser;
+        if(!name || !phone || !city || !specificAdress || !ward) {
+            alert("Bạn chưa điền đủ thông tin")
+            return;
+        }
         const atLeastOneProductHasZeroQuantity  = products.some(product => product.quantity === 0);
         if (atLeastOneProductHasZeroQuantity) {
             setErrorBuy("Không được có sản phẩm nào có số lượng mua bằng 0");
@@ -150,7 +156,7 @@ const ShoppingCartTemplate = () => {
 
     return (
         <main className="min-h-screen">
-            <div className="lg:max-w-screen-xl sm:max-w-screen-md max-w-screen-sm w-full px-3 mx-auto text-black">
+            <div className="lg:max-w-screen-xl sm:max-w-screen-md max-w-screen-sm w-full px-3 mx-auto text-black ">
                 <div className="-mx-3">
                     <h1 className="font-semibold text-lg px-3 py-3 mb-3 border-b">
                         Giỏ hàng của bạn
@@ -243,7 +249,7 @@ const ShoppingCartTemplate = () => {
 
                         <div className="lg:w-6/12 md:px-3">
                             <div className="px-4 py-6 bg-white border">
-                                <div className="pt-5 pb-2 mt-3 border-t text-lg font-semibold text-orange-500 border-orange-500">
+                                <div className="pt-5 pb-2 mt-3 border-t text-lg font-semibold text-black border-bltext-black">
                                     TỔNG TIỀN
                                 </div>
 
@@ -306,7 +312,7 @@ const ShoppingCartTemplate = () => {
                                     </div>
                                 </div>
 
-                                <div className="py-5 my-3 border-t text-lg font-semibold text-orange-500 border-orange-500">
+                                <div className="py-5 my-3 border-t text-lg font-semibold text-black border-bltext-black">
                                     THÔNG TIN KHÁCH HÀNG
                                 </div>
                                 <input
@@ -364,7 +370,7 @@ const ShoppingCartTemplate = () => {
                                 <button
                                     disabled={orderLoading}
                                     onClick={handleOrderProduct}
-                                    className="font-semibold uppercase mt-5 py-3 w-full text-white bg-black"
+                                    className="font-semibold uppercase mt-5 py-3 w-full text-white bg-blue-500"
                                 >
                                     {orderLoading ? (
                                         <LoadingDots color="#ffff" />

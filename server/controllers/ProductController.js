@@ -20,11 +20,15 @@ class ProductController {
             });
         }
     }
+    
 
     // [GET] /api/products
     async findAll(req, res) {
         try {
-            const products = await productServices.findAll();
+            const { q = '', type = '' } = req.query
+            console.log(type)
+
+            const products = await productServices.findAll({ q: q, type: type });
 
             return res.json({
                 success: true,
@@ -33,7 +37,24 @@ class ProductController {
         } catch (error) {
             res.status(500).json({
                 success: false,
-                message: "Create products error",
+                message: "Get products error",
+            });
+        }
+    }
+
+    // [GET] /api/products/infoManager
+    async infoManager(req, res) {
+        try {
+            const infoManager = await productServices.infoManager();
+
+            return res.json({
+                success: true,
+                data: infoManager?.data,
+            });
+        } catch (error) {
+            res.status(500).json({
+                success: false,
+                message: "Get products error",
             });
         }
     }
@@ -41,9 +62,10 @@ class ProductController {
     // [PUT] /api/products
     async update(req, res) {
         try {
-            const { title, price, inventory, description } = req.body;
+            const { title, type, price, inventory, description } = req.body;
             const product = await productServices.update({
                 title,
+                type,
                 price: +price,
                 inventory: +inventory,
                 description,
@@ -94,7 +116,7 @@ class ProductController {
                 });
             }
             console.log("getUserRes: ", getUserRes);
-            const { title, price, inventory, description, thumbnail, images } =
+            const { type, title, price, inventory, description, thumbnail, images } =
                 req.body;
             const product = await productServices.create({
                 title,
@@ -103,6 +125,7 @@ class ProductController {
                 description,
                 thumbnail,
                 images,
+                type
             });
             console.log("product: ", product);
 

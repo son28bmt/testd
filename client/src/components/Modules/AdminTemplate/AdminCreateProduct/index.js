@@ -27,6 +27,7 @@ const AdminCreateProduct = () => {
         inventory: 0,
         description: "",
     });
+    const [typeProduct, setTypeProduct] = useState("ao");
     const [thumbnail, setThumbnail] = useState({
         urlThumbnail: "",
         fileThumbnail: null,
@@ -70,6 +71,12 @@ const AdminCreateProduct = () => {
     // Handle Create Product
     const handleCreateProduct = async () => {
         const { title, price, inventory, description } = dataProduct;
+        const { fileThumbnail, listImages, urlThumbnail } = thumbnail;
+
+        if(!fileThumbnail || !listImages || !urlThumbnail || !title || !price || !inventory || !description) {
+            alert("Bạn chưa điền đủ thông tin.")
+            return;
+        }
         setIsAction(true);
         
         try {
@@ -98,7 +105,7 @@ const AdminCreateProduct = () => {
             }
             
             const createProductRes = await productService.create({
-                title, price, inventory, description, thumbnail: dataServerImage?.image, images: JSON.stringify(dataServerImages?.images)
+                type: typeProduct, title, price, inventory, description, thumbnail: dataServerImage?.image, images: JSON.stringify(dataServerImages?.images)
             });
             
             console.log("createProductRes: ", createProductRes);
@@ -117,7 +124,7 @@ const AdminCreateProduct = () => {
     
     return (
         <div>
-            <div className="bg-white dark:bg-slate-700 px-3 py-4 rounded-md shadow-sm">
+            <div className="bg-white px-3 py-4 rounded-md shadow-sm">
 
                 <div className="mb-3">
                     <label htmlFor="id-title" className="font-semibold text-base mb-2">
@@ -203,6 +210,17 @@ const AdminCreateProduct = () => {
                         onChange={eventOnchangeDataProduct}
                         className={`border h-10 px-4 rounded-md w-full outline-none`}
                     />
+                </div>
+
+                <div className="mb-4">
+                    <select value={typeProduct} onChange={(event) => setTypeProduct(event.target.value)}  className="border px-2 py-1 rounded-md">
+                        <option value="macbook">macbook</option>
+                        <option value="ipad">ipad</option>
+                        <option value="iphone">iphone</option>
+                        <option value="watch">watch</option>
+                        <option value="airpods">airpods</option>
+
+                    </select>
                 </div>
 
                 <div className="mb-3">

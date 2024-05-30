@@ -17,12 +17,27 @@ class ProductService {
             };
         }
     }
-    async findAll() {
+    async findAll({ q = '', type = '' }) {
         try {
+            console.log(type)
             const products = await axios.get(
-                `${apiUrl}/api/products`,
+                `${apiUrl}/api/products?q=${q}${type ? "&type=" + type : ""}`,
             );
             return products.data;
+        } catch (error) {
+            return {
+                success: false,
+                message: "Get products error",
+                error: error,
+            };
+        }
+    }
+    async infoManager() {
+        try {
+            const infoManager = await axios.get(
+                `${apiUrl}/api/products/infoManager`,
+            );
+            return infoManager.data;
         } catch (error) {
             return {
                 success: false,
@@ -82,12 +97,12 @@ class ProductService {
         }
     }
 
-    async update({ title, price, inventory, description, productId }) {
+    async update({ title, type, price, inventory, description, productId }) {
         try {
             const product = await axios.put(
                 `${apiUrl}/api/products/${productId}`,
                 {
-                    title, price, inventory, description
+                    title, type, price, inventory, description
                 }
             );
             return product.data;
@@ -100,12 +115,12 @@ class ProductService {
         }
     }
 
-    async create({ title, price, inventory, description, thumbnail, images }) {
+    async create({ type, title, price, inventory, description, thumbnail, images }) {
         try {
             const product = await axios.post(
                 `${apiUrl}/api/products`,
                 {
-                    title, price, inventory, description, thumbnail, images
+                    type, title, price, inventory, description, thumbnail, images
                 }
             );
             return product.data;

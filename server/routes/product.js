@@ -7,6 +7,9 @@ const multer = require("../middleware/multer");
 
 
 // Controller
+
+router.get("/infoManager", ProductController.infoManager);
+
 router.post("/images", verifyToken, multer.array("files", 10), ProductController.uploadImages);
 router.post("/image", verifyToken, multer.single("file"), ProductController.uploadImage);
 

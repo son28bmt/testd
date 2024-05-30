@@ -14,7 +14,7 @@ const NavAccout = () => {
     const [isNavAccount, setIsNavAccount] = useState(false);
 
     return (
-        <div className="z-20">
+        <div className="z-20 text-black">
             {isAuthenticated ? (
                 <div
                     ref={dropdownNavAccountRef}
@@ -22,38 +22,33 @@ const NavAccout = () => {
                 >
                     <div
                         onClick={() => setIsNavAccount(true)}
-                        className="relative transition-all duration-75 cursor-pointer active:scale-105 w-10 h-10 rounded-full border overflow-hidden"
+                        className="relative transition-all duration-75 cursor-pointer active:scale-105 w-10 h-10 rounded-full overflow-hidden"
                     >
                         <img
                             loading="lazy"
                             alt="Ảnh người dùng"
-                            src={`/static/images/avatar-default.png`}
+                            src={`/static/images/logo-tr.png`}
                             className="absolute left-0 right-0 w-10 h-10 object-cover"
                         />
                     </div>
                     {isNavAccount && (
-                        <div className="z-10 border rounded-md bg-white dark:bg-slate-800 w-60 shadow-sm top-full right-0 py-1 absolute">
-                            {/* {session?.user.role.roleName === "admin" && (
+                        <div className="z-10 border rounded-md bg-white w-60 shadow-sm top-full right-0 py-1 absolute">
+                            {user.userId === 1 && (
                                 <Link
                                     title="Trang admin"
-                                    to={`/admin`}
-                                    target="_blank"
+                                    to={`/admin/products`}
                                 >
                                     <div
-                                        className="px-3 py-2 cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-500"
+                                        className="px-3 py-2 cursor-pointer hover:bg-gray-100"
                                     >
                                         Admin
                                     </div>
                                 </Link>
-                            )} */}
-                            <Link to={`/admin/orders`} title="Trang điều khiển">
-                                <div className="px-3 py-2 cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-500">
-                                    Admin
-                                </div>
-                            </Link>
+                            )}
+                            
                             <div
                                 onClick={() => logoutUser()}
-                                className="px-3 py-2 cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-500"
+                                className="px-3 py-2 cursor-pointer hover:bg-gray-100"
                             >
                                 Đăng xuất
                             </div>
@@ -61,18 +56,12 @@ const NavAccout = () => {
                     )}
                 </div>
             ) : (
-                <div className="flex items-center divide-x">
+                <div className="flex items-center divide-x text-white">
                     <Link
                         to={`/auth/login`}
                         title="Trang đăng nhập"
                     >
                         <span className="px-2 py-1">Đăng nhập</span>
-                    </Link>
-                    <Link
-                        to={`/auth/register`}
-                        title="Trang đăng kí"
-                    >
-                        <span className="px-2 py-1">Đăng kí</span>
                     </Link>
                 </div>
             )}

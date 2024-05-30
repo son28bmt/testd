@@ -1,8 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Dispatch, Fragment, ReactNode, SetStateAction, useRef } from "react";
+import { Fragment, useRef } from "react";
 
 const Modal = ({ children, isShow, setIsShow }) => {
-    const desktopModalRef = useRef(null);
 
     return (
         <>

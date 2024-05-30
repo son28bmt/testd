@@ -72,7 +72,7 @@ const AdminOrder = () => {
     return (
         <div>
             <div>
-                <div className="bg-white dark:bg-slate-700 px-3 py-4 rounded-md shadow-sm">
+                <div className="bg-white px-3 py-4 rounded-md shadow-sm">
 
                     <div className="overflow-y-auto relative border rounded-md mb-5">
                         <table className="table-auto w-full">
@@ -80,6 +80,7 @@ const AdminOrder = () => {
                                 <col style={{ width: "10%" }} />
                                 <col style={{ width: "30%" }} />
                                 <col style={{ width: "20%" }} />
+                                <col style={{ width: "10%" }} />
                                 <col style={{ width: "15%" }} />
                                 <col style={{ width: "15%" }} />
                             </colgroup>
@@ -88,6 +89,7 @@ const AdminOrder = () => {
                                     <th className="rounded-tl-md">Id</th>
                                     <th>Sản phẩm</th>
                                     <th>Thông tin</th>
+                                    <th>Ngày đặt</th>
                                     <th>Giá</th>
                                     <th className="rounded-tr-md">Thao tác</th>
                                 </tr>
@@ -126,6 +128,7 @@ const AdminOrder = () => {
                                                                         </Link>
                                                                     </strong>
                                                                 </div>
+                                                                
                                                                 <div>Giá: {bill?.price}</div>
                                                                 <div>Số lượng mua: {bill?.quantity}</div>
                                                             </div>
@@ -133,6 +136,11 @@ const AdminOrder = () => {
                                                     </td>
                                                     <td>
                                                         {DataInfo(JSON.parse(bill?.info))}
+                                                    </td>
+                                                    <td>
+                                                    <td>
+                                                    {new Date(bill?.createdAt).toLocaleString()}
+                                                    </td>
                                                     </td>
                                                     <td>
                                                         {formatNumberToPrice(bill?.price * bill?.quantity)} VNĐ
@@ -168,7 +176,7 @@ const AdminOrder = () => {
             {!!isFormDeleteBill && (
                 <Modal
                     size="medium"
-                    title="Xóa truyện?"
+                    title="Xóa đơn hàng?"
                     isShow={!!isFormDeleteBill}
                     setIsShow={(type) => setIsFormDeleteBill(null)}
                 >

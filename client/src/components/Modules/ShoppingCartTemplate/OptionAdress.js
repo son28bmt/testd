@@ -13,10 +13,9 @@ const OptionAdress = ({ adressUser, setAdressUser }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(
-                    "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json"
-                );
-                setCities(response.data);
+                const response = await fetch('static/json/data.json');
+                const data = await response.json();
+                setCities(data);
                 // if(adressUser.city) {
                 //     const selectedCityData = response.data.find((city) => city.Id === adressUser.city?.value);
                 //     if(selectedCityData) {
@@ -125,22 +124,27 @@ const OptionAdress = ({ adressUser, setAdressUser }) => {
 
 export default OptionAdress;
 
-const SelectComponent = ({ selectType, options, selected, placeholder, handleOnChange }) => (
-    <Select
-        className="mb-4 basic-single"
-        classNamePrefix="select"
-        defaultValue={null}
-        placeholder={placeholder}
-        isClearable={true}
-        isSearchable={true}
-        name="color"
-        value={selected}
-        onChange={(selected) => handleOnChange(selectType, selected)}
-        options={options.map((option) => {
-            return {
-                value: option.Id,
-                label: option.Name,
-            };
-        })}
-    />
-);
+const SelectComponent = ({ selectType, options, selected, placeholder, handleOnChange }) => {
+    if(!options) {
+        return null;
+    }
+    return (
+        <Select
+            className="mb-4 basic-single"
+            classNamePrefix="select"
+            defaultValue={null}
+            placeholder={placeholder}
+            isClearable={true}
+            isSearchable={true}
+            name="color"
+            value={selected}
+            onChange={(selected) => handleOnChange(selectType, selected)}
+            options={options?.map((option) => {
+                return {
+                    value: option.Id,
+                    label: option.Name,
+                };
+            })}
+        />
+    )
+}

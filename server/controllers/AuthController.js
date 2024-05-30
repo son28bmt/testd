@@ -67,6 +67,9 @@ class AuthController {
 
             return res.json({
                 success: true,
+                user: {
+                    userId: getUserRes?.user.userId
+                },
                 accessToken: accessToken,
             });
         } catch (error) {
@@ -90,6 +93,9 @@ class AuthController {
 
             return res.json({
                 success: true,
+                user: {
+                    userId: req.userId
+                },
                 message: "Token hợp lệ",
             });
         } catch (error) {

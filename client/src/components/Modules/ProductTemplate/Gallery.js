@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import SwiperButton from "./SwiperButton"
 
 
-const Gallery = ({ images, thumbsSwiper, setThumbsSwiper }) => {
+const Gallery = ({ productId, images, thumbsSwiper, setThumbsSwiper }) => {
 
     const thumbRef = useRef(null);
 
@@ -15,6 +15,7 @@ const Gallery = ({ images, thumbsSwiper, setThumbsSwiper }) => {
         <>
             <div className="mb-4">
                 <Swiper
+                    key={productId}
                     ref={thumbRef}
                     slidesPerView={1}
                     modules={[Navigation]}
@@ -40,6 +41,7 @@ const Gallery = ({ images, thumbsSwiper, setThumbsSwiper }) => {
                                     key={image}
                                 >
                                     <img
+                                        key={productId}
                                         alt="Image Product"
                                         src={image}
                                         className=""
@@ -59,6 +61,7 @@ const Gallery = ({ images, thumbsSwiper, setThumbsSwiper }) => {
                                 onClick={() => thumbRef.current?.swiper.slideTo(index)}
                             >
                                 <img
+                                    key={productId}
                                     alt="Image Product"
                                     src={image}
                                     className=""
